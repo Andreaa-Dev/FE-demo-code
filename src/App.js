@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import WishListPage from "./pages/WishListPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const url = "https://fakestoreapi.com/products";
@@ -48,7 +49,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LayOut />,
+      element: <LayOut wishList={wishList} />,
       children: [
         { path: "/", element: <HomePage /> },
         {
@@ -69,6 +70,8 @@ function App() {
         },
 
         { path: "/wishList", element: <WishListPage wishList={wishList} /> },
+
+        { path: "/cart", element: <CartPage /> },
       ],
     },
   ]);

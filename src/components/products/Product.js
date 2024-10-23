@@ -6,9 +6,13 @@ export default function Product(prop) {
 
   function addToFav(product) {
     // setWishList(wishList.push(product));
-
+    // check if product inside/include in the wishList array
     // JS method: some
-    setWishList([...wishList, product]);
+    // boolean
+    const isInclude = wishList.some((item) => item.id === product.id);
+    if (!isInclude) {
+      setWishList([...wishList, product]);
+    }
   }
   // 1 => 1
   // "a" => "a"
@@ -16,7 +20,7 @@ export default function Product(prop) {
   // [...array,product]
 
   // cart
-  // {...product, quantity: 0}
+  // {...product, quantity: 1}
   return (
     <div>
       <p>{product.title}</p>

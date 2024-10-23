@@ -1,4 +1,5 @@
 import React from "react";
+import WishListItem from "./WishListItem";
 
 export default function WishList(prop) {
   const { wishList } = prop;
@@ -10,12 +11,7 @@ export default function WishList(prop) {
     <div>
       <h1> WishList</h1>
       {wishList.map((item) => {
-        return (
-          <div>
-            <p> {item.title}</p>
-            <p> {item.price}</p>
-          </div>
-        );
+        return <WishListItem key={item.id} item={item} />;
       })}
     </div>
   );
