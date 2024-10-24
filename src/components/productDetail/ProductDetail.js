@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function ProductDetail() {
+  // const [isFavorited, setIsFavorited] = useState(false);
+
   const { productId } = useParams();
   // console.log(useParams(), "params");
   // console.log(random, "random");
@@ -47,10 +49,22 @@ export default function ProductDetail() {
     );
   }
 
+  // function addToFav(product) {
+  //   const isInclude = wishList.some((item) => item.id === product.id);
+  //   if (!isInclude) {
+  //     setWishList([...wishList, product]);
+  //     setIsFavorited(true);
+  //   }
+  // }
+
   return (
     <div>
       <h1>ProductDetail </h1>
       <p> {productDetail.title}</p>
+      {/* <FavoriteIcon
+        onClick={() => addToFav(product)}
+        sx={{ color: isFavorited ? "red" : "black" }}
+      /> */}
     </div>
   );
 }

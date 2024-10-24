@@ -16,6 +16,11 @@
   list-style: none;
 }
 
+.navList a {
+  text-decoration: none;
+  color: black;
+}
+
 img {
   height: 40px;
   width: 40px;

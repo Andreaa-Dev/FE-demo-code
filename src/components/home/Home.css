@@ -1,0 +1,11 @@
+.home {
+  background-image: url("../../images/background.avif");
+  background-size: cover;
+  background-position: center;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
