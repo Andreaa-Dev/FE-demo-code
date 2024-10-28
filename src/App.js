@@ -10,22 +10,27 @@ import WishListPage from "./pages/WishListPage";
 import CartPage from "./pages/CartPage";
 
 function App() {
-  const url = "https://fakestoreapi.com/products";
+   const [userInput, setUserInput] = useState("");
+   const [wishList, setWishList] = useState([]);
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null);
 
-  const [productList, setProductList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const [userInput, setUserInput] = useState("");
-  const [wishList, setWishList] = useState([]);
-
-  console.log(userInput);
-  console.log(wishList, "wishList");
+   // step 1: update state 
+   const [productResponse, setProductResponse] = useState({
+     products: [],
+     totalCount: 0,
+   });
+ 
+   const productUrl =
+     "http://localhost:5291/api/v1/products?offset=2&limit=2&minPrice=0&maxPrice=10000";
+  
   function getData() {
     axios
-      .get(url)
+      .get(productUrl)
       .then((response) => {
-        setProductList(response.data);
+        console.log(response)
+        console.log(response.data);
+       setProductResponse(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -37,6 +42,9 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  console.log(productResponse , "from App");
+
 
   if (loading) {
     return <div> Please wait 1 second </div>;
@@ -51,12 +59,12 @@ function App() {
       path: "/",
       element: <LayOut wishList={wishList} />,
       children: [
-        { path: "/", element: <HomePage /> },
+        { path: "/", element: <HomePage  /> },
         {
           path: "products",
           element: (
             <ProductPage
-              productList={productList}
+              // productList={productList}
               setUserInput={setUserInput}
               userInput={userInput}
               wishList={wishList}

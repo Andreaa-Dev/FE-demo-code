@@ -14,21 +14,22 @@ export default function Products(prop) {
       // setIsFavorited(true);
     }
   }
-  const { productList, userInput, wishList, setWishList } = prop;
+  const {userInput, wishList, setWishList } = prop;
 
-  const result = productList.filter((product) =>
-    product.title.toLowerCase().includes(userInput.toLowerCase())
-  );
+  // const result = productList.filter((product) =>
+  //   product.title.toLowerCase().includes(userInput.toLowerCase())
+  // );
 
-  let products = productList;
-  if (userInput) {
-    products = result;
-  }
+  // let products = productList;
+  // if (userInput) {
+  //   products = result;
+  // }
 
   return (
     <div>
+      <p> THis is product page</p>
       {/* <h1> Product List</h1> */}
-      <div className="productList">
+      {/* <div className="productList">
         {products.map((product) => {
           return (
             <Product
@@ -39,7 +40,7 @@ export default function Products(prop) {
             />
           );
         })}
-      </div>
+      </div> */}
 
       {/* apply the red color for all products */}
       {/* <div className="productList">
