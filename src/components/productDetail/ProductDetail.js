@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 import axios from "axios";
 
 export default function ProductDetail() {
-  // const [isFavorited, setIsFavorited] = useState(false);
-
   const { productId } = useParams();
-  // console.log(useParams(), "params");
-  // console.log(random, "random");
 
   const [productDetail, setProductDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const productDetailUrl = `https://fakestoreapi.com/products/${productId}`;
+  const productDetailUrl = `http://localhost:5291/api/v1/products/${productId}`;
 
   function fetchProductDetail() {
     axios
@@ -60,7 +57,13 @@ export default function ProductDetail() {
   return (
     <div>
       <h1>ProductDetail </h1>
-      <p> {productDetail.title}</p>
+      <p> {productDetail.name}</p>
+      <p> {productDetail.description}</p>
+      <p> {productDetail.price} $</p>
+      <img src={productDetail.imageUrl} alt={productDetail.name} />
+      <Link to="/products">
+        <Button> Go back</Button>
+      </Link>
       {/* <FavoriteIcon
         onClick={() => addToFav(product)}
         sx={{ color: isFavorited ? "red" : "black" }}

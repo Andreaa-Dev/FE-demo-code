@@ -8,7 +8,6 @@ import Rating from "@mui/material/Rating";
 export default function Product(prop) {
   const [isFavorited, setIsFavorited] = useState(false);
   const [open, setOpen] = useState(false);
-  
 
   const { product, wishList, setWishList } = prop;
 
@@ -30,14 +29,14 @@ export default function Product(prop) {
 
   return (
     <div>
-    <img src = {product.imageUrl} alt = {product.name}/>
+      <img src={product.imageUrl} alt={product.name} />
       <p>{product.name}</p>
       <p>{product.price}$</p>
       <Link to={`${product.id}`}>
         <ArrowForwardIosIcon />
-        <button>More detail</button>
+        {/* <button>More detail</button> */}
       </Link>
-  
+
       <FavoriteIcon
         onClick={() => addToFav(product)}
         sx={{ color: isFavorited ? "red" : "black" }}
@@ -49,7 +48,7 @@ export default function Product(prop) {
         autoHideDuration={5000}
         onClose={handleClose}
         message={`A ${product.name} is add to wish list`}
-      /> 
+      />
     </div>
   );
 }

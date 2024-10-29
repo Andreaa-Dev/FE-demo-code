@@ -14,11 +14,11 @@ function App() {
   const [wishList, setWishList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // pagination
   const [page, setPage] = useState(1);
-    // const [limit, setLimit] = useState(1);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000);
 
+  console.log(minPrice, maxPrice, "price");
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -29,20 +29,21 @@ function App() {
   });
 
   let limit = 3;
-  let offset = (page -1)*limit;
-  
-function getUrl(userInput){
-let productUrl = `http://localhost:5291/api/v1/products?offset=${offset}&limit=${limit}&search=${userInput}&minPrice=0&maxPrice=10000`;
-if(userInput){
-  productUrl += `&search=${userInput}`;
-}
-return productUrl;
-}
+  let offset = (page - 1) * limit;
 
+  function getUrl(userInput, minPrice, maxPrice) {
+    let productUrl = `http://localhost:5291/api/v1/products?offset=${offset}&limit=${limit}&search=${userInput}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+
+    // if (userInput) {
+    //   productUrl += `&search=${userInput}`;
+    // }
+    console.log(productUrl, "p");
+    return productUrl;
+  }
 
   function getData() {
     axios
-      .get(getUrl(userInput))
+      .get(getUrl(userInput, minPrice, maxPrice))
       .then((response) => {
         console.log(response);
         console.log(response.data);
@@ -57,7 +58,7 @@ return productUrl;
 
   useEffect(() => {
     getData();
-  }, [offset,limit,userInput]);
+  }, [offset, limit, userInput, minPrice, maxPrice]);
 
   if (loading) {
     return <div> Please wait 1 second </div>;
@@ -83,8 +84,10 @@ return productUrl;
               wishList={wishList}
               setWishList={setWishList}
               totalCount={productResponse.totalCount}
-              page = {page}
-              handleChange = {handleChange}
+              page={page}
+              handleChange={handleChange}
+              setMinPrice={setMinPrice}
+              setMaxPrice={setMaxPrice}
             />
           ),
         },
