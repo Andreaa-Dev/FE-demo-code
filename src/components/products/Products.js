@@ -1,36 +1,16 @@
-import React, { useState } from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import React from "react";
 
 import "./Products.css";
 import Product from "./Product";
+import ProductsPagination from "./ProductsPagination";
 
 export default function Products(prop) {
-  // const [isFavorited, setIsFavorited] = useState(false);
-
-  function addToFav(product) {
-    const isInclude = wishList.some((item) => item.id === product.id);
-    if (!isInclude) {
-      setWishList([...wishList, product]);
-      // setIsFavorited(true);
-    }
-  }
-  const {userInput, wishList, setWishList } = prop;
-
-  // const result = productList.filter((product) =>
-  //   product.title.toLowerCase().includes(userInput.toLowerCase())
-  // );
-
-  // let products = productList;
-  // if (userInput) {
-  //   products = result;
-  // }
-
+const { productList, wishList, setWishList, totalCount, page, handleChange } = prop;
   return (
     <div>
-      <p> THis is product page</p>
-      {/* <h1> Product List</h1> */}
-      {/* <div className="productList">
-        {products.map((product) => {
+      <h1> Product List</h1>
+      <div className="productList">
+        {productList.map((product) => {
           return (
             <Product
               key={product.id}
@@ -40,23 +20,12 @@ export default function Products(prop) {
             />
           );
         })}
-      </div> */}
+      </div>
 
-      {/* apply the red color for all products */}
-      {/* <div className="productList">
-        {products.map((product) => {
-          return (
-            <div>
-              <p> {product.title}</p>
-
-              <FavoriteIcon
-                onClick={() => addToFav(product)}
-                sx={{ color: isFavorited ? "red" : "black" }}
-              />
-            </div>
-          );
-        })}
-      </div> */}
+      <ProductsPagination 
+      totalCount={totalCount}
+      page = {page}
+      handleChange={handleChange}/>
     </div>
   );
 }

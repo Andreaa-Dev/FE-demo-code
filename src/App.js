@@ -10,27 +10,43 @@ import WishListPage from "./pages/WishListPage";
 import CartPage from "./pages/CartPage";
 
 function App() {
-   const [userInput, setUserInput] = useState("");
-   const [wishList, setWishList] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
+  const [userInput, setUserInput] = useState("");
+  const [wishList, setWishList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-   // step 1: update state 
-   const [productResponse, setProductResponse] = useState({
-     products: [],
-     totalCount: 0,
-   });
- 
-   const productUrl =
-     "http://localhost:5291/api/v1/products?offset=2&limit=2&minPrice=0&maxPrice=10000";
+  // pagination
+  const [page, setPage] = useState(1);
+    // const [limit, setLimit] = useState(1);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  const [productResponse, setProductResponse] = useState({
+    products: [],
+    totalCount: 0,
+  });
+
+  let limit = 3;
+  let offset = (page -1)*limit;
   
+function getUrl(userInput){
+let productUrl = `http://localhost:5291/api/v1/products?offset=${offset}&limit=${limit}&search=${userInput}&minPrice=0&maxPrice=10000`;
+if(userInput){
+  productUrl += `&search=${userInput}`;
+}
+return productUrl;
+}
+
+
   function getData() {
     axios
-      .get(productUrl)
+      .get(getUrl(userInput))
       .then((response) => {
-        console.log(response)
+        console.log(response);
         console.log(response.data);
-       setProductResponse(response.data);
+        setProductResponse(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -41,10 +57,7 @@ function App() {
 
   useEffect(() => {
     getData();
-  }, []);
-
-  console.log(productResponse , "from App");
-
+  }, [offset,limit,userInput]);
 
   if (loading) {
     return <div> Please wait 1 second </div>;
@@ -59,16 +72,19 @@ function App() {
       path: "/",
       element: <LayOut wishList={wishList} />,
       children: [
-        { path: "/", element: <HomePage  /> },
+        { path: "/", element: <HomePage /> },
         {
           path: "products",
           element: (
             <ProductPage
-              // productList={productList}
+              productList={productResponse.products}
               setUserInput={setUserInput}
               userInput={userInput}
               wishList={wishList}
               setWishList={setWishList}
+              totalCount={productResponse.totalCount}
+              page = {page}
+              handleChange = {handleChange}
             />
           ),
         },

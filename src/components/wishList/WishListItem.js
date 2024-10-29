@@ -4,7 +4,7 @@ export default function WishListItem(prop) {
   const { item } = prop;
   return (
     <div>
-      <p> Name: {item.title}</p>
+      <p> Name: {item.name}</p>
       <p> Price: {item.price} $</p>
     </div>
   );
