@@ -8,6 +8,8 @@ import ProductPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import WishListPage from "./pages/WishListPage";
 import CartPage from "./pages/CartPage";
+import UserRegister from "./components/user/UserRegister";
+import UserLogin from "./components/user/UserLogin";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -31,19 +33,31 @@ function App() {
   let limit = 3;
   let offset = (page - 1) * limit;
 
-  function getUrl(userInput, minPrice, maxPrice) {
-    let productUrl = `http://localhost:5291/api/v1/products?offset=${offset}&limit=${limit}&search=${userInput}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+  // way 1
+  let productUrl = `http://localhost:5291/api/v1/products?offset=${offset}&limit=${limit}&search=${userInput}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
 
-    // if (userInput) {
-    //   productUrl += `&search=${userInput}`;
-    // }
-    console.log(productUrl, "p");
-    return productUrl;
-  }
+  // way 2
+  // url: limit + offset => 2times
+  // search => limit + offset + search => 3 times
+  // function getUrl(userInput, minPrice, maxPrice) {
+  //   let productUrl = `http://localhost:5291/api/v1/products?offset=${offset}&limit=${limit}`;
+
+  //   if (userInput) {
+  //     productUrl += `&search=${userInput}`;
+  //   }
+  //   if (minPrice) {
+  //     productUrl += `&minPrice=${minPrice}`;
+  //   }
+  //   if (maxPrice) {
+  //     productUrl += `&maxPrice=${maxPrice}`;
+  //   }
+  //   console.log(productUrl, "p");
+  //   return productUrl;
+  // }
 
   function getData() {
     axios
-      .get(getUrl(userInput, minPrice, maxPrice))
+      .get(productUrl)
       .then((response) => {
         console.log(response);
         console.log(response.data);
@@ -99,6 +113,9 @@ function App() {
         { path: "/wishList", element: <WishListPage wishList={wishList} /> },
 
         { path: "/cart", element: <CartPage /> },
+
+        { path: "/register", element: <UserRegister /> },
+        { path: "/login", element: <UserLogin /> },
       ],
     },
   ]);

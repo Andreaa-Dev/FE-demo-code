@@ -1,5 +1,17 @@
 # React topics
 
+
+### Wednesday 
+- form with 2 fields
+- form with MUI password
+- form validation: react-hook-form
+- App - url
+
+- register + login - token
+
+- 1-3pm 
+- 3-5: Guest speaker 
+
 ### Wednesday
 
 - search

@@ -43,7 +43,7 @@ export default function NavBar(prop) {
           <PersonIcon />
         </Link> */}
 
-        <Link to="/login">
+        <Link to="/register">
           <Avatar alt="user icon" src={user} />
         </Link>
       </ul>
