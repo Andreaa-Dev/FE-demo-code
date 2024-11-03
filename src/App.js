@@ -10,6 +10,9 @@ import WishListPage from "./pages/WishListPage";
 import CartPage from "./pages/CartPage";
 import UserRegister from "./components/user/UserRegister";
 import UserLogin from "./components/user/UserLogin";
+import UserProfile from "./components/user/UserProfile";
+import ProtectedRoute from "./components/user/ProtectedRoute";
+import DashBoard from "./components/dashBoard/DashBoard";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -19,17 +22,13 @@ function App() {
   const [page, setPage] = useState(1);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
-
-  console.log(minPrice, maxPrice, "price");
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
-
   const [productResponse, setProductResponse] = useState({
     products: [],
     totalCount: 0,
   });
-
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   let limit = 3;
   let offset = (page - 1) * limit;
 
@@ -59,8 +58,6 @@ function App() {
     axios
       .get(productUrl)
       .then((response) => {
-        console.log(response);
-        console.log(response.data);
         setProductResponse(response.data);
         setLoading(false);
       })
@@ -69,10 +66,40 @@ function App() {
         setLoading(false);
       });
   }
-
   useEffect(() => {
     getData();
   }, [offset, limit, userInput, minPrice, maxPrice]);
+
+  // user
+  const [userData, setUserData] = useState(null);
+  const [isUserDataLoading, setIsUserDataLoading] = useState(true);
+
+  function getUserData() {
+    setIsUserDataLoading(true);
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:5291/api/v1/users/auth", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserData(res.data);
+        setIsUserDataLoading(false);
+      })
+      .catch((err) => {
+        setIsUserDataLoading(false);
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+  console.log(userData, "from app");
+
+  // protected route
+  let isAuthenticated = userData ? true : false;
 
   if (loading) {
     return <div> Please wait 1 second </div>;
@@ -109,13 +136,34 @@ function App() {
           path: "products/:productId",
           element: <ProductDetailPage />,
         },
-
         { path: "/wishList", element: <WishListPage wishList={wishList} /> },
-
         { path: "/cart", element: <CartPage /> },
-
         { path: "/register", element: <UserRegister /> },
-        { path: "/login", element: <UserLogin /> },
+        { path: "/login", element: <UserLogin getUserData={getUserData} /> },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              element={
+                <UserProfile userData={userData} setUserData={setUserData} />
+              }
+            />
+          ),
+          // element: <UserProfile />,
+        },
+
+        {
+          path: "/dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              element={<DashBoard />}
+            />
+          ),
+        },
       ],
     },
   ]);

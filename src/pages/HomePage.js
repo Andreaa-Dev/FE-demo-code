@@ -5,7 +5,7 @@ import FormWithValidation from "../components/form/FormWithValidation";
 export default function HomePage() {
   return (
     <div>
-      <FormWithValidation />
+      {/* <FormWithValidation /> */}
       <Home />
     </div>
   );

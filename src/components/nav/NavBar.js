@@ -11,13 +11,11 @@ import Avatar from "@mui/material/Avatar";
 import "./NavBar.css";
 import logo from "../../images/logo.png";
 import user from "../../images/user.jpg";
+import person from "../../images/person.png";
 
 export default function NavBar(prop) {
   const { wishList } = prop;
-  // badgeContent = number of item in wishList
-  // [] => nameArray.length
   const arrayLength = wishList.length;
-  console.log(arrayLength, "length");
 
   return (
     <nav className="nav">
@@ -43,8 +41,8 @@ export default function NavBar(prop) {
           <PersonIcon />
         </Link> */}
 
-        <Link to="/register">
-          <Avatar alt="user icon" src={user} />
+        <Link to="/login">
+          <Avatar alt="user icon" src={person} />
         </Link>
       </ul>
     </nav>

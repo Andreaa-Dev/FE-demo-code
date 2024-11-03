@@ -19,7 +19,7 @@ export default function UserRegister() {
   //     setUserInformation({ ...userInformation, password: event.target.value });
   //   }
 
-  console.log(userInformation, "user");
+  // console.log(userInformation, "user");
 
   // way 2: combine 2 functions to 1
   function onChangeHandler(event) {
@@ -28,16 +28,12 @@ export default function UserRegister() {
       [event.target.id]: event.target.value,
     });
   }
-  console.log(userInformation, "user");
 
   // navigate
   const navigate = useNavigate();
   // step 2: send to backend
   function registerNewUser() {
     const userUrl = "http://localhost:5291/api/v1/users/register";
-    // method: POST
-    // body: {email: "user1@gmail.com", password: "16394"}
-    // axios.post(url,body);
 
     axios
       .post(userUrl, userInformation)

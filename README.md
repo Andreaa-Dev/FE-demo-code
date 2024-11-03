@@ -1,5 +1,13 @@
 # React topics
 
+### Plan this week 
+- user profile - protected route  - edit profile
+- admin - dash board - show list of user - create, edit, delete product
+- cart => increase quantity => create order 
+- get order list by user id
+
+
+### Sunday
 
 ### Wednesday 
 - form with 2 fields

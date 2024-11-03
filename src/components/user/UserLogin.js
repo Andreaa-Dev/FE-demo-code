@@ -8,8 +8,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function UserLogin() {
+export default function UserLogin(prop) {
+  const { getUserData } = prop;
   // password from MUI
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -37,26 +39,31 @@ export default function UserLogin() {
     setUserLogIn({ ...userLogIn, password: event.target.value });
   }
 
-  // onclick
+  const navigate = useNavigate();
   function logInUser() {
     const userUrlLogIn = "http://localhost:5291/api/v1/users/signIn";
-
-    // send req to backend
     axios
       .post(userUrlLogIn, userLogIn)
       .then((res) => {
         console.log(res, "response from log in");
-        // token = res.data
         if (res.status === 200) {
-          // save to local storage
           localStorage.setItem("token", res.data);
         }
       })
-      .catch((error) => console.log(error));
+      .then(() => getUserData())
+      .then(() => navigate("/profile"))
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 401) {
+          // alert("Dont have an account, please register");
+          alert(error.response.data.message);
+        }
+      });
   }
   return (
     <div>
       <h1> UserLogin </h1>
+      <p>1234567An!</p>
       <TextField
         id="email"
         label="Email"
@@ -87,6 +94,13 @@ export default function UserLogin() {
         />
       </FormControl>
       <Button onClick={logInUser}> Log in</Button>
+
+      <div>
+        <h1> Do not have an account yet?</h1>
+        <Link to={"/register"}>
+          <Button> Create an account</Button>
+        </Link>
+      </div>
     </div>
   );
 }
