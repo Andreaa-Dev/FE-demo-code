@@ -96,7 +96,6 @@ function App() {
   useEffect(() => {
     getUserData();
   }, []);
-  console.log(userData, "from app");
 
   // protected route
   let isAuthenticated = userData ? true : false;
@@ -112,7 +111,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LayOut wishList={wishList} />,
+      element: <LayOut wishList={wishList} isAuthenticated={isAuthenticated} />,
       children: [
         { path: "/", element: <HomePage /> },
         {

@@ -5,6 +5,7 @@
 - admin - dash board - show list of user - create, edit, delete product
 - cart => increase quantity => create order 
 - get order list by user id
+- Navbar - user icon
 
 
 ### Sunday

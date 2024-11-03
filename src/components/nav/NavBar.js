@@ -14,7 +14,7 @@ import user from "../../images/user.jpg";
 import person from "../../images/person.png";
 
 export default function NavBar(prop) {
-  const { wishList } = prop;
+  const { wishList, isAuthenticated } = prop;
   const arrayLength = wishList.length;
 
   return (
@@ -41,9 +41,23 @@ export default function NavBar(prop) {
           <PersonIcon />
         </Link> */}
 
-        <Link to="/login">
-          <Avatar alt="user icon" src={person} />
-        </Link>
+        {/* user  */}
+        {isAuthenticated ? (
+          <Link to="/profile">
+            <Avatar alt="user icon" src={user} />
+          </Link>
+        ) : (
+          <Link to="/login">
+            <Avatar alt="user icon" src={person} />
+          </Link>
+        )}
+
+        {/* admin  - tmr */}
+        {isAuthenticated ? (
+          <Link to="/dashboard">Dashboard</Link>
+        ) : (
+          <p style={{ display: "none" }}>Dashboard</p>
+        )}
       </ul>
     </nav>
   );
