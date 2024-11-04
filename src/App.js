@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import "./App.css";
 import LayOut from "./components/shared/LayOut";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductsPage";
@@ -14,6 +15,8 @@ import UserProfile from "./components/user/UserProfile";
 import ProtectedRoute from "./components/user/ProtectedRoute";
 import DashBoard from "./components/dashBoard/DashBoard";
 import ProductDashBoard from "./components/dashBoard/ProductDashBoard";
+import AboutPage from "./pages/AboutPage";
+import Example from "./Example";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -148,6 +151,14 @@ function App() {
         },
         { path: "/wishList", element: <WishListPage wishList={wishList} /> },
         { path: "/cart", element: <CartPage /> },
+
+        {
+          path: "about",
+          element: <AboutPage />,
+          children: [{ path: "example", element: <Example /> }],
+        },
+        // about/example
+
         { path: "/register", element: <UserRegister /> },
         { path: "/login", element: <UserLogin getUserData={getUserData} /> },
         {

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ProductItem from "./ProductItem";
-import { Box, Button, Popover, TextField } from "@mui/material";
+import {
+  Button,
+  Popover,
+  TextField,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@mui/material";
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { Description } from "@mui/icons-material";
+import ProductItem from "./ProductItem";
 
 export default function ProductDashBoard() {
   // way 1: pass prop from App
@@ -24,7 +27,6 @@ export default function ProductDashBoard() {
   function fetchData() {
     let url =
       "http://localhost:5291/api/v1/products?offset=0&limit=100&search=&minPrice0&maxPrice=10000";
-
     axios
       .get(url)
       .then((response) => {
@@ -41,29 +43,22 @@ export default function ProductDashBoard() {
     fetchData();
   }, []);
 
-  console.log(productResponse.products);
-
   // popover - MUI
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
   // fetch category
-
   const [categoryList, setCategoryList] = useState([]);
 
   function fetchCategory() {
     let url = "http://localhost:5291/api/v1/category";
-
     axios
       .get(url)
       .then((response) => {
@@ -77,7 +72,6 @@ export default function ProductDashBoard() {
   useEffect(() => {
     fetchCategory();
   }, []);
-  console.log(categoryList);
 
   // get information from form
   const [productInfo, setProductInfo] = useState({
@@ -97,6 +91,27 @@ export default function ProductDashBoard() {
   }
 
   console.log(productInfo, "infor");
+
+  // send request to backend
+  function createProduct() {
+    const token = localStorage.getItem("token");
+    const url = "http://localhost:5291/api/v1/products";
+    // send
+    axios
+      .post(url, productInfo, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          alert("Product is created successfully ");
+          fetchData();
+        }
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <div>
       <h1> ProductDashBoard </h1>
@@ -164,6 +179,8 @@ export default function ProductDashBoard() {
             })}
           </Select>
         </FormControl>
+
+        <Button onClick={createProduct}> Add product</Button>
       </Popover>
 
       <h1> List of products</h1>

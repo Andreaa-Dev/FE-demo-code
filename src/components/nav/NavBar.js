@@ -34,6 +34,9 @@ export default function NavBar(prop) {
             <FavoriteIcon />
           </Link>
         </Badge>
+        <Link to="/about">
+          <p> About</p>
+        </Link>
         <Link to="/cart">
           <ShoppingCartIcon />
         </Link>
