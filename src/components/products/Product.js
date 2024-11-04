@@ -20,6 +20,9 @@ export default function Product(prop) {
     }
   }
 
+  // cart : product + quantity
+  // [...cartList, {product: product, quantity: 1}]
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

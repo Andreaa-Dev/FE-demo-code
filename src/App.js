@@ -84,6 +84,7 @@ function App() {
         },
       })
       .then((res) => {
+        // null => res.data
         setUserData(res.data);
         setIsUserDataLoading(false);
       })
