@@ -14,7 +14,7 @@ import user from "../../images/user.jpg";
 import person from "../../images/person.png";
 
 export default function NavBar(prop) {
-  const { wishList, isAuthenticated } = prop;
+  const { wishList, isAuthenticated, userData } = prop;
   const arrayLength = wishList.length;
 
   return (
@@ -53,7 +53,7 @@ export default function NavBar(prop) {
         )}
 
         {/* admin  - tmr */}
-        {isAuthenticated ? (
+        {isAuthenticated && userData.role === "Admin" ? (
           <Link to="/dashboard">Dashboard</Link>
         ) : (
           <p style={{ display: "none" }}>Dashboard</p>

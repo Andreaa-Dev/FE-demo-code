@@ -1,16 +1,21 @@
 # React topics
 
-### Plan this week 
-- user profile - protected route  - edit profile
-- admin - dash board - show list of user - create, edit, delete product
-- cart => increase quantity => create order 
-- get order list by user id
-- Navbar - user icon
+### Plan this week
 
+- Sunday: user profile - protected route - edit profile - Navbar - user icon
+
+- Monday: admin - dash board - show list of user - create, edit, delete product
+
+- Tuesday: no class => Zoom
+
+- Wednesday cart => increase quantity => create order + get order list by user id
+
+- Thursday: no class => Zoom
 
 ### Sunday
 
-### Wednesday 
+### Wednesday
+
 - form with 2 fields
 - form with MUI password
 - form validation: react-hook-form
@@ -18,8 +23,8 @@
 
 - register + login - token
 
-- 1-3pm 
-- 3-5: Guest speaker 
+- 1-3pm
+- 3-5: Guest speaker
 
 ### Wednesday
 

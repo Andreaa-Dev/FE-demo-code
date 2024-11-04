@@ -13,6 +13,7 @@ import UserLogin from "./components/user/UserLogin";
 import UserProfile from "./components/user/UserProfile";
 import ProtectedRoute from "./components/user/ProtectedRoute";
 import DashBoard from "./components/dashBoard/DashBoard";
+import ProductDashBoard from "./components/dashBoard/ProductDashBoard";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -109,10 +110,19 @@ function App() {
     return <div> {error.message}</div>;
   }
 
+  // admin
+  // let shouldCheckAdmin = true;
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LayOut wishList={wishList} isAuthenticated={isAuthenticated} />,
+      element: (
+        <LayOut
+          wishList={wishList}
+          isAuthenticated={isAuthenticated}
+          userData={userData}
+        />
+      ),
       children: [
         { path: "/", element: <HomePage /> },
         {
@@ -160,7 +170,29 @@ function App() {
             <ProtectedRoute
               isUserDataLoading={isUserDataLoading}
               isAuthenticated={isAuthenticated}
+              // shouldCheckAdmin={shouldCheckAdmin}
+              shouldCheckAdmin={true}
+              userData={userData}
               element={<DashBoard />}
+            />
+          ),
+        },
+
+        {
+          path: "/product-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              // shouldCheckAdmin={shouldCheckAdmin}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={
+                <ProductDashBoard
+                // productList={productResponse.products}
+                // loading={loading}
+                />
+              }
             />
           ),
         },
