@@ -30,6 +30,8 @@ function App() {
     products: [],
     totalCount: 0,
   });
+  const [cartList, setCartList] = useState([]);
+
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -142,6 +144,8 @@ function App() {
               handleChange={handleChange}
               setMinPrice={setMinPrice}
               setMaxPrice={setMaxPrice}
+              cartList={cartList}
+              setCartList={setCartList}
             />
           ),
         },
@@ -150,7 +154,16 @@ function App() {
           element: <ProductDetailPage />,
         },
         { path: "/wishList", element: <WishListPage wishList={wishList} /> },
-        { path: "/cart", element: <CartPage /> },
+        {
+          path: "/cart",
+          element: (
+            <CartPage
+              cartList={cartList}
+              setCartList={setCartList}
+              userData={userData}
+            />
+          ),
+        },
 
         {
           path: "about",

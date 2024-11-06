@@ -1,5 +1,19 @@
 # React topics
 
+### Wednesday
+
+- today: cart
+- tmr: no class
+
+### Next week
+
+- deployment
+- how to present + presentation
+- tech interview - 1hr
+
+- Wednesday:
+- Thursday - whole day
+
 ### Plan this week
 
 - Sunday: user profile - protected route - edit profile - Navbar - user icon

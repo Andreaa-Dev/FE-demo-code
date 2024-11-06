@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Snackbar from "@mui/material/Snackbar";
+import { Snackbar, Button } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Rating from "@mui/material/Rating";
 
 export default function Product(prop) {
   const [isFavorited, setIsFavorited] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const { product, wishList, setWishList } = prop;
+  const { product, wishList, setWishList, cartList, setCartList } = prop;
 
   function addToFav(product) {
     const isInclude = wishList.some((item) => item.id === product.id);
@@ -29,12 +28,26 @@ export default function Product(prop) {
     }
     setOpen(false);
   };
+  // add to cart
+  function addToCart(product) {
+    // [product1, product 2]
+    // [{name: "product1",price:18.75 , quantity: 1}]
+    // [], {} => ref
+    // setCartList([...cartList, product]);
 
+    const isInclude = cartList.some((item) => item.id === product.id);
+    if (!isInclude) {
+      setCartList([...cartList, { ...product, quantity: 1 }]);
+    }
+  }
+  console.log(cartList, "cart");
   return (
     <div>
       <img src={product.imageUrl} alt={product.name} />
       <p>{product.name}</p>
       <p>{product.price}$</p>
+      <Button onClick={() => addToCart(product)}> Add to cart </Button>
+
       <Link to={`${product.id}`}>
         <ArrowForwardIosIcon />
         {/* <button>More detail</button> */}

@@ -1,10 +1,15 @@
 import React from "react";
-import Cart from "../components/cart/Cart";
+import CartList from "../components/cart/CartList";
 
-export default function CartPage() {
+export default function CartPage(prop) {
+  const { cartList, setCartList, userData } = prop;
   return (
     <div>
-      <Cart />
+      <CartList
+        cartList={cartList}
+        setCartList={setCartList}
+        userData={userData}
+      />
     </div>
   );
 }
