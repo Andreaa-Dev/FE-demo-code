@@ -110,7 +110,10 @@ export default function ProductDashBoard() {
           fetchData();
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        // check res.status.message
+      });
   }
   return (
     <div>

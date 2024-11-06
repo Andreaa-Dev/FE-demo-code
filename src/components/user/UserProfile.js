@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 import { TextField } from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function UserProfile(prop) {
   const { userData, setUserData } = prop;
@@ -69,6 +69,9 @@ export default function UserProfile(prop) {
       </Button>
       <Button variant="contained" onClick={logOutHandler}>
         Log out
+      </Button>
+      <Button variant="contained">
+        <Link to="/orders"> Order History</Link>
       </Button>
 
       <Popover

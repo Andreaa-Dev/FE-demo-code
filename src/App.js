@@ -17,6 +17,7 @@ import DashBoard from "./components/dashBoard/DashBoard";
 import ProductDashBoard from "./components/dashBoard/ProductDashBoard";
 import AboutPage from "./pages/AboutPage";
 import Example from "./Example";
+import UserOrderHistory from "./components/orders/UserOrderHistory";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -187,6 +188,8 @@ function App() {
           ),
           // element: <UserProfile />,
         },
+
+        { path: "/orders", element: <UserOrderHistory userData={userData} /> },
 
         {
           path: "/dashboard",

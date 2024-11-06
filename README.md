@@ -5,6 +5,8 @@
 - today: cart
 - tmr: no class
 
+- QA: order list from user id
+
 ### Next week
 
 - deployment
