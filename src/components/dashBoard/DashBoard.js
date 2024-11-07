@@ -11,7 +11,8 @@ export default function DashBoard() {
       {/* <OrderDashBoard /> */}
 
       <Link to="/product-dashboard"> Products</Link>
-      <p> Users</p>
+      <br />
+      <Link to="/user-dashboard"> Users</Link>
       <p> Orders</p>
     </div>
   );

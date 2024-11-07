@@ -18,6 +18,7 @@ import ProductDashBoard from "./components/dashBoard/ProductDashBoard";
 import AboutPage from "./pages/AboutPage";
 import Example from "./Example";
 import UserOrderHistory from "./components/orders/UserOrderHistory";
+import UserDashBoard from "./components/dashBoard/UserDashBoard";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -220,6 +221,18 @@ function App() {
                 // loading={loading}
                 />
               }
+            />
+          ),
+        },
+        {
+          path: "/user-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<UserDashBoard />}
             />
           ),
         },

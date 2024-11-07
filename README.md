@@ -1,5 +1,13 @@
 # React topics
 
+- Admin: see list of all users - delete user
+
+- role make someone => admin
+
+// day 2: cart - 2 pro
+
+// get cart list by user Id
+
 ### Wednesday
 
 - today: cart
